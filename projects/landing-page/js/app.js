@@ -55,27 +55,33 @@ function createNavbar () {
     };
     //append navItem to navbar 
     navbar.innerHTML = navItem;
+    
 };
 
 createNavbar();
 
-// Add class 'active' to section when near top of viewport
-
-//helping functions
+//get top position of the section 
 
 function getPosition (section) {
     return Math.floor(section.getBoundingClientRect().top);
 };
 
+// remove active class and set background to default
 function disableActive (section) {
     section.classList.remove('your-active-class');
+    section.style.background= "linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%)";
 };
+
+//add active class and set background to red
 
 function enableActive (conditional, section) {
     if(conditional){
         section.classList.add('your-active-class');
+        section.style.backgroundColor= "red";
     }
 }
+
+//function that activates the active class on the viewed section
 
 function activateSection(){
     for (section of sections){
@@ -90,8 +96,23 @@ function activateSection(){
 };
 
 window.addEventListener('scroll', activateSection);
+
 // Scroll to anchor ID using scrollTO event
 
+function scroll(element) {
+    const { x, y, top } = element.getBoundingClientRect();
+    window.scrollTo({
+      top: document.documentElement.scrollTop + y,
+      left: x,
+    })
+  }
+
+  function navItemClick(navEvent) {
+    const SectionID = navEvent.target.dataset.sectionid;
+    section = document.querySelector(`#${SectionID}`);
+    navItem = navEvent.target;
+    scroll(activeSection)
+  }
 
 /**
  * End Main Functions
@@ -99,10 +120,5 @@ window.addEventListener('scroll', activateSection);
  * 
 */
 
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
 
 
