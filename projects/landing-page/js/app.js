@@ -18,6 +18,10 @@
  * 
 */
 
+//variables to store navbar and sections array
+
+const navbar = document.querySelector('#navbar__list');
+const sections = document.querySelectorAll('section');
 
 /**
  * End Global Variables
@@ -35,6 +39,25 @@
 
 // build the nav
 
+//function to add list items to unordered list
+
+function createNavbar () {
+    //empty navItem
+    let navItem = '';
+
+    for (let section of sections){
+        //store id and data-nat in variables
+        const sectionID= section.id;
+        const sectionName=section.dataset.nav;
+
+        // add li with class and specific id and data-nat as Section Name to empty navItem
+        navItem += `<li><a class= "menu__link" href="#${sectionID}">${sectionName}</a></li>`;
+    };
+    //append navItem to navbar 
+    navbar.innerHTML = navItem;
+};
+
+createNavbar();
 
 // Add class 'active' to section when near top of viewport
 
