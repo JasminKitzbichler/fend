@@ -61,7 +61,35 @@ createNavbar();
 
 // Add class 'active' to section when near top of viewport
 
+//helping functions
 
+function getPosition (section) {
+    return Math.floor(section.getBoundingClientRect().top);
+};
+
+function disableActive (section) {
+    section.classList.remove('your-active-class');
+};
+
+function enableActive (conditional, section) {
+    if(conditional){
+        section.classList.add('your-active-class');
+    }
+}
+
+function activateSection(){
+    for (section of sections){
+        const position = getPosition(section);
+        
+        viewing = () => position < 150 && position >= -150;
+        
+        disableActive (section);
+        enableActive (viewing(),section);
+    };
+
+};
+
+window.addEventListener('scroll', activateSection);
 // Scroll to anchor ID using scrollTO event
 
 
